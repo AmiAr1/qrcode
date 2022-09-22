@@ -9,11 +9,12 @@ import pyqrcode
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    qr_code = pyqrcode.create(message.text)
-    qr_code.png("media/code.png")
-    photo = open("media/code.png", 'rb')
-    await bot.send_photo(message.from_user.id, photo,
-                         caption="Вот QR код готов")
+    if message.text != 'news':
+        qr_code = pyqrcode.create(message.text)
+        qr_code.png("media/code.png")
+        photo = open("media/code.png", 'rb')
+        await bot.send_photo(message.from_user.id, photo,
+                             caption="Вот QR код готов")
 
 
 
